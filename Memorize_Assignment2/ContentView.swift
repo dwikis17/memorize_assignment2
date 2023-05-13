@@ -10,12 +10,36 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+            Text("Memorize!")
+                .font(.largeTitle)
+            ScrollView{
+                LazyVGrid(columns: [GridItem(.adaptive(minimum: 95))]) {
+                    CardView().aspectRatio(2/3, contentMode: .fit)
+                    CardView(isFaceUp: false)
+                }
+                .padding(.horizontal)
+                .foregroundColor(.red)
+            }
         }
-        .padding()
+        
+    }
+}
+
+
+struct CardView: View {
+    var shape = RoundedRectangle(cornerRadius: 20)
+    var isFaceUp = true
+    
+    var body: some View {
+        ZStack {
+            if isFaceUp {
+                shape.stroke(lineWidth: 3)
+                Text("Content")
+            } else {
+                shape.fill()
+                shape.stroke(lineWidth: 3)
+            }
+        }
     }
 }
 
